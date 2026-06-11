@@ -265,6 +265,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue'
 <nav class="nav-bar">
   <div class="nav-logo">ETC单片<br/><small>MVP v1.7</small></div>
   <button class="nav-tab active" onclick="goPage('page-intro',this)">📘 需求说明</button>
+  <button class="nav-tab" onclick="goPage('page-banner-spec',this)">🔵 首页状态条</button>
   <button class="nav-tab" onclick="goPage('page-ops-touch',this)">🎯 运营触达图示</button>
   <div class="nav-sep"></div>
   <span style="font-size:11px;font-weight:700;color:#fa8c16;background:#fff7e6;padding:2px 8px;border-radius:4px;white-space:nowrap;margin-right:4px;">需求1·以旧换新</span>
@@ -915,12 +916,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue'
             <tr>
               <td><span class="tag t-blue">需求1</span> 搜索→购买（新购）</td>
               <td><strong>北京、重庆、江苏</strong> 发行</td>
-              <td>仅上述三地已发行 ETC 用户可办理新购；其他省份发行设备不在 MVP 范围内</td>
+              <td>—</td>
             </tr>
           </tbody>
         </table>
         <div class="req-rule-item" style="margin-top:10px;"><span class="rk">校验时机</span><span class="rv">进入办理/换新首页或绑定车牌估价时，根据车牌关联的发行方判断；不符合则提示并隐藏办理按钮</span></div>
-        <div class="warn-box">⚠ 发行地区与物流收货地址无关；同一用户收货在北京、ETC 为江苏发行时，仅可走<strong>新购（江苏）</strong>，不可走以旧换新。</div>
       </div>
     </details>
 
@@ -929,7 +929,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue'
       <summary>💰 关键业务规则汇总 <span class="hint">（点击展开）</span></summary>
       <div class="req-content">
         <div class="req-rule-item"><span class="rk">发行地区·换新</span><span class="rv">以旧换新（需求2）<strong>仅面向北京发行</strong>的旧设备；估价、抵扣、下单全链路校验发行方，非北京发行不可参与</span></div>
-        <div class="req-rule-item"><span class="rk">发行地区·新购</span><span class="rv">搜索→购买（需求1）仅面向 <strong>北京、重庆、江苏</strong> 发行的 ETC 用户；其他发行地区不展示办理入口</span></div>
         <div class="req-rule-item"><span class="rk">设备推荐·换新</span><span class="rv">换新可选新设备与新购同款最新 3 款；展示抵扣后实付逻辑，具体 SKU 与定价待确认；不与新购 SKU 池分叉</span></div>
         <div class="req-rule-item"><span class="rk">设备推荐·新购</span><span class="rv">仅展示在售最新 3 款（具体型号与价格<strong>待确认</strong>，见「设备推荐策略」专节）</span></div>
         <div class="req-rule-item"><span class="rk">ETC激活合规</span><span class="rv">激活需绑定实名车牌（行驶证+身份证），暂无车牌可使用系统临时分配「临C」车牌，证件上传后自动更新</span></div>
@@ -1114,7 +1113,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue'
             <span class="flow-arrow">→</span>
             <span class="flow-node fn-green">点击进入小程序</span>
           </div>
-          <div class="req-rule-item"><span class="rk">广告位</span><span class="rv">搜一搜竞价广告，关键词：小万出行ETC / 小万ETC / 小万出行etc办理；目标排在自然结果最上方</span></div>
+          <div class="req-rule-item"><span class="rk">广告位</span><span class="rv">搜一搜竞价广告，关键词：etc、etc办理、ETC、ETC办理等；目标排在自然结果最上方</span></div>
           <div class="req-rule-item"><span class="rk">广告主体</span><span class="rv">三川在线（杭州）信息技术有限公司，需微信认证（蓝V）</span></div>
           <div class="req-rule-item"><span class="rk">账号区块</span><span class="rv">搜索词命中「小万出行etc」时，微信自动聚合展示：小程序 + 服务号（小万出行ETC）+ 服务号（小万出行）</span></div>
           <div class="req-rule-item"><span class="rk">快捷入口</span><span class="rv">服务号下方展示「我的ETC」「会员中心」快速链接，减少用户进入后的操作步骤</span></div>
@@ -5097,6 +5096,228 @@ function confirmCancel() {
 
 
 <!-- ═══════════════════════════════════════
+     首页状态条 · 需求说明
+════════════════════════════════════════ -->
+<div class="page" id="page-banner-spec">
+<style>
+.bs-wrap{max-width:960px;margin:0 auto;padding:28px 24px 60px;}
+.bs-h1{font-size:16px;font-weight:800;color:#1677ff;margin:28px 0 6px;padding-left:14px;border-left:4px solid #1677ff;}
+.bs-desc{font-size:12px;color:#666;line-height:1.8;margin-bottom:20px;background:#f0f5ff;border-radius:8px;padding:12px 16px;}
+.bs-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:32px;}
+.bs-table th{background:#1677ff;color:#fff;padding:9px 12px;text-align:left;font-weight:700;}
+.bs-table th:first-child{border-radius:8px 0 0 0;}
+.bs-table th:last-child{border-radius:0 8px 0 0;}
+.bs-table td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top;line-height:1.7;}
+.bs-table tr:hover td{background:#f5f9ff;}
+.bs-state{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap;}
+.bs-s-pay{background:#fff7e6;color:#d46b08;border:1px solid #ffd591;}
+.bs-s-ship{background:#e6f4ff;color:#0958d9;border:1px solid #91caff;}
+.bs-s-transit{background:#e6f4ff;color:#0958d9;border:1px solid #91caff;}
+.bs-s-doc{background:#f9f0ff;color:#531dab;border:1px solid #d3adf7;}
+.bs-s-sign{background:#fff0f6;color:#c41d7f;border:1px solid #ffadd2;}
+.bs-s-activate{background:#f6ffed;color:#237804;border:1px solid #b7eb8f;}
+.bs-s-done{background:#f5f5f5;color:#aaa;border:1px solid #e0e0e0;}
+.bs-banner-preview{background:#1677ff;border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin:6px 0 4px;max-width:480px;}
+.bs-banner-preview .left .title{font-size:13px;font-weight:700;color:#fff;}
+.bs-banner-preview .left .sub{font-size:11px;color:#bde0ff;margin-top:3px;}
+.bs-banner-preview .left .logistics{font-size:10px;color:#91caff;margin-top:2px;display:flex;align-items:center;gap:6px;}
+.bs-banner-preview .btn{background:#fff;border-radius:14px;padding:5px 12px;font-size:11px;font-weight:700;color:#1677ff;white-space:nowrap;flex-shrink:0;margin-left:12px;}
+.bs-rule{font-size:11px;color:#888;margin-top:3px;}
+.bs-trigger{font-size:11px;color:#555;}
+.bs-note{background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;padding:10px 14px;font-size:11px;color:#614700;line-height:1.8;margin-bottom:12px;}
+</style>
+<div class="bs-wrap">
+  <div style="font-size:20px;font-weight:900;color:#1c1c1e;margin-bottom:6px;">🔵 首页状态条 · 需求说明</div>
+  <div class="bs-desc">
+    首页蓝色状态条（<b>订单进度 Banner</b>）在用户有进行中订单时常驻展示，实时反映当前最高优先级任务，引导用户完成履约动作。<br/>
+    <b>展示规则：</b>同时有多笔订单时，优先展示最早下单的未完结订单；激活完成后自动消失。<br/>
+    <b>适用流程：</b>新购 &amp; 以旧换新（共用同一组状态，以旧换新在「待激活」前多一条旧设备注销提示）。
+  </div>
+
+  <!-- ── 状态总表 ── -->
+  <div class="bs-h1">状态全览</div>
+  <table class="bs-table">
+    <thead>
+      <tr>
+        <th style="width:80px;">状态</th>
+        <th style="width:420px;">Banner 展示内容</th>
+        <th>触发条件</th>
+        <th>右侧按钮</th>
+        <th>消失条件</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- 1. 待付款 -->
+      <tr>
+        <td><span class="bs-state bs-s-pay">① 待付款</span></td>
+        <td>
+          <div class="bs-banner-preview">
+            <div class="left">
+              <div class="title">你有一笔订单待付款</div>
+              <div class="sub">¥125 · 限时 30 分钟内完成支付</div>
+            </div>
+            <div class="btn">去支付</div>
+          </div>
+        </td>
+        <td class="bs-trigger">用户提交订单后尚未完成支付；订单未超时取消</td>
+        <td>「去支付」→ 跳转支付页</td>
+        <td>完成支付 / 订单超时取消</td>
+      </tr>
+
+      <!-- 2. 待发货·资料未提交 -->
+      <tr>
+        <td><span class="bs-state bs-s-ship">② 待发货<br/><small>资料未提交</small></span></td>
+        <td>
+          <div class="bs-banner-preview">
+            <div class="left">
+              <div class="title">你有一笔订单待处理 · 待发货</div>
+              <div class="sub">可提前提交资料，审核通过后即可签约</div>
+              <div class="logistics" style="margin-top:4px;"><span style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:600;">📦 待出库</span></div>
+            </div>
+            <div class="btn">去提交</div>
+          </div>
+        </td>
+        <td class="bs-trigger">支付成功；资料尚未提交；商家未发货</td>
+        <td>「去提交」→ 跳转资料上传页</td>
+        <td>资料提交成功后切换至下一状态</td>
+      </tr>
+
+      <!-- 3. 待发货·资料审核中 -->
+      <tr>
+        <td><span class="bs-state bs-s-doc">③ 待发货<br/><small>资料审核中</small></span></td>
+        <td>
+          <div class="bs-banner-preview">
+            <div class="left">
+              <div class="title">你有一笔订单待处理</div>
+              <div class="sub">资料审核中，预计 1 个工作日内完成</div>
+              <div class="logistics" style="margin-top:4px;"><span style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:600;">📦 待出库</span></div>
+            </div>
+            <div class="btn">查看详情</div>
+          </div>
+        </td>
+        <td class="bs-trigger">资料已提交，后台审核处理中；商家未发货</td>
+        <td>「查看详情」→ 跳转订单详情页</td>
+        <td>审核通过 / 审核驳回</td>
+      </tr>
+
+      <!-- 4. 待发货·审核驳回 -->
+      <tr>
+        <td><span class="bs-state bs-s-doc">④ 待发货<br/><small>资料驳回</small></span></td>
+        <td>
+          <div class="bs-banner-preview" style="background:#ff4d4f;">
+            <div class="left">
+              <div class="title">你有一笔订单需要处理</div>
+              <div class="sub">资料审核未通过，请修改后重新提交</div>
+              <div class="logistics" style="margin-top:4px;"><span style="background:rgba(255,255,255,0.15);color:rgba(255,204,199,0.9);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:600;">📦 待出库</span></div>
+            </div>
+            <div class="btn" style="color:#ff4d4f;">重新提交</div>
+          </div>
+        </td>
+        <td class="bs-trigger">资料审核结果为「驳回」</td>
+        <td>「重新提交」→ 跳转资料上传页（带驳回原因）</td>
+        <td>重新提交资料成功</td>
+      </tr>
+
+      <!-- 5. 待发货·审核通过待签约 -->
+      <tr>
+        <td><span class="bs-state bs-s-sign">⑤ 待发货<br/><small>待签约</small></span></td>
+        <td>
+          <div class="bs-banner-preview" style="background:#c41d7f;">
+            <div class="left">
+              <div class="title">你有一笔订单待处理</div>
+              <div class="sub">完成车辆签约后，设备即可发出</div>
+              <div class="logistics" style="margin-top:4px;"><span style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:600;">📦 待发货</span></div>
+            </div>
+            <div class="btn" style="color:#c41d7f;">去签约</div>
+          </div>
+        </td>
+        <td class="bs-trigger">资料审核通过；车辆签约未完成</td>
+        <td>「去签约」→ 跳转车辆签约页</td>
+        <td>签约完成</td>
+      </tr>
+
+      <!-- 6. 待收货 -->
+      <tr>
+        <td><span class="bs-state bs-s-transit">⑥ 待收货</span></td>
+        <td>
+          <div class="bs-banner-preview">
+            <div class="left">
+              <div class="title">你有一笔订单待处理 · 待收货</div>
+              <div class="sub">设备已发出，请注意查收</div>
+              <div class="logistics" style="margin-top:4px;"><span style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:600;">🚚 待收货</span></div>
+            </div>
+            <div class="btn">查看物流</div>
+          </div>
+        </td>
+        <td class="bs-trigger">订单已发货；用户未确认收货</td>
+        <td>「查看物流」→ 跳转订单详情页（滚动至物流信息）</td>
+        <td>用户确认收货 / 物流签收后自动切换</td>
+      </tr>
+
+      <!-- 7. 待激活（新购） -->
+      <tr>
+        <td><span class="bs-state bs-s-activate">⑦ 待激活<br/><small>新购</small></span></td>
+        <td>
+          <div class="bs-banner-preview" style="background:#237804;">
+            <div class="left">
+              <div class="title">你有一笔订单待处理 · 待激活</div>
+              <div class="sub">设备已签收，激活后即可享受高速 95 折</div>
+              <div class="logistics" style="margin-top:4px;"><span style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:600;">✅ 已签收</span></div>
+            </div>
+            <div class="btn" style="color:#237804;">去激活</div>
+          </div>
+        </td>
+        <td class="bs-trigger">订单已签收；设备未激活</td>
+        <td>「去激活」→ 跳转激活设备页</td>
+        <td>激活成功 → Banner 消失</td>
+      </tr>
+
+      <!-- 8. 待激活（以旧换新） -->
+      <tr>
+        <td><span class="bs-state bs-s-activate">⑦ 待激活<br/><small>以旧换新</small></span></td>
+        <td>
+          <div class="bs-banner-preview" style="background:#d46b08;">
+            <div class="left">
+              <div class="title">你有一笔订单待处理 · 待激活</div>
+              <div class="sub">新设备已签收，激活后旧设备将自动注销</div>
+              <div class="logistics" style="margin-top:4px;"><span style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:600;">✅ 已签收</span></div>
+            </div>
+            <div class="btn" style="color:#d46b08;">去激活</div>
+          </div>
+        </td>
+        <td class="bs-trigger">以旧换新订单已签收；新设备未激活</td>
+        <td>「去激活」→ 跳转激活页（含旧设备注销确认弹窗）</td>
+        <td>激活成功 → Banner 消失</td>
+      </tr>
+
+      <!-- 9. 消失 -->
+      <tr style="background:#fafafa;">
+        <td><span class="bs-state bs-s-done">⑧ 已完结</span></td>
+        <td><div style="font-size:11px;color:#aaa;padding:6px 0;">— 不展示 —</div></td>
+        <td class="bs-trigger" style="color:#aaa;">设备激活成功</td>
+        <td style="color:#aaa;">—</td>
+        <td style="color:#aaa;">永久消失</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- ── 补充规则 ── -->
+  <div class="bs-h1">补充规则</div>
+  <div class="bs-note">
+    <b>优先级：</b>同一用户有多笔进行中订单时，按下单时间升序展示第一笔（最早下单优先）。<br/>
+    <b>多状态并存：</b>资料审核与物流状态可并行，Banner 以「需要用户操作」的状态优先（如审核驳回 > 待发货无操作）。<br/>
+    <b>已付款但无待办：</b>资料已提交且签约完成后，Banner 文案降级为「待收货」状态，不再有操作按钮，仅展示进度。<br/>
+    <b>展示位置：</b>固定在首页 Banner 轮播图下方、热门业务格子上方，蓝色圆角卡片，高度固定 56px。<br/>
+    <b>点击整体：</b>点击状态条任意位置（非按钮区域）均跳转订单详情页。
+  </div>
+
+</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
      运营触达图示
 ════════════════════════════════════════ -->
 <div class="page" id="page-ops-touch">
@@ -5172,6 +5393,145 @@ function confirmCancel() {
 <div class="ot-wrap">
 
 <!-- ══════════ 新购 ══════════ -->
+<!-- ─── 服务状态提醒 ─── -->
+<div class="ot-h1" style="border-color:#07c160;">📬 服务状态提醒（小程序订阅消息）</div>
+
+<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin-bottom:28px;">
+
+  <!-- 模版示意 -->
+  <div class="ot-card">
+    <div class="ot-lbl">消息模版示意</div>
+    <div class="ot-sub">字段固定，说明字段按状态动态填写</div>
+    <div class="mp">
+      <div class="ms" style="height:460px;">
+        <div style="height:100%;background:#ededed;display:flex;flex-direction:column;">
+          <div style="background:#ededed;padding:10px 12px;font-size:12px;font-weight:600;color:#1c1c1e;text-align:center;border-bottom:1px solid #d9d9d9;">小万出行 ETC &gt;</div>
+          <div style="overflow-y:auto;padding:8px 8px;flex:1;display:flex;flex-direction:column;gap:8px;">
+            <!-- 消息卡 1 - 资料提醒 -->
+            <div class="wxmsg-card">
+              <div class="wxmsg-body">
+                <div class="wxmsg-title" style="font-size:13px;">ETC 服务状态提醒</div>
+                <div class="wxmsg-row"><span class="k">当前状态</span><span class="v" style="color:#fa8c16;font-weight:600;">待提交资料</span></div>
+                <div class="wxmsg-row"><span class="k">车牌号</span><span class="v">苏 E8F231</span></div>
+                <div class="wxmsg-row"><span class="k">提醒时间</span><span class="v">2026-06-11 14:00</span></div>
+                <div class="wxmsg-row"><span class="k">说明</span><span class="v" style="max-width:110px;line-height:1.4;font-size:10px;">设备已发出，请提前完成资料提交</span></div>
+              </div>
+              <div class="wxmsg-footer">
+                <div class="wxmsg-footer-logo"><div class="ico">万</div><span>小万出行 ETC</span></div>
+                <a href="#" style="font-size:11px;">进入小程序查看 ›</a>
+              </div>
+            </div>
+            <!-- 消息卡 2 - 审核通过 -->
+            <div class="wxmsg-card">
+              <div class="wxmsg-body">
+                <div class="wxmsg-title" style="font-size:13px;">ETC 服务状态提醒</div>
+                <div class="wxmsg-row"><span class="k">当前状态</span><span class="v" style="color:#07c160;font-weight:600;">资料审核通过</span></div>
+                <div class="wxmsg-row"><span class="k">车牌号</span><span class="v">苏 E8F231</span></div>
+                <div class="wxmsg-row"><span class="k">提醒时间</span><span class="v">2026-06-11 15:30</span></div>
+                <div class="wxmsg-row"><span class="k">说明</span><span class="v" style="max-width:110px;line-height:1.4;font-size:10px;">资料审核通过</span></div>
+              </div>
+              <div class="wxmsg-footer">
+                <div class="wxmsg-footer-logo"><div class="ico">万</div><span>小万出行 ETC</span></div>
+                <a href="#" style="font-size:11px;">进入小程序查看 ›</a>
+              </div>
+            </div>
+          </div>
+          <div style="background:#f2f2f7;padding:7px 12px;display:flex;gap:8px;border-top:1px solid #e5e5ea;">
+            <div style="flex:1;text-align:center;font-size:10px;color:#8e8e93;">ETC服务</div>
+            <div style="flex:1;text-align:center;font-size:10px;color:#8e8e93;">会员中心</div>
+            <div style="flex:1;text-align:center;font-size:10px;color:#8e8e93;">我的ETC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 触发规则说明 -->
+  <div style="flex:1;min-width:340px;">
+    <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:10px;">📋 触发场景 &amp; 发送规则</div>
+    <table style="width:100%;border-collapse:collapse;font-size:11px;">
+      <thead>
+        <tr style="background:#07c160;color:#fff;">
+          <th style="padding:8px 10px;text-align:left;border-radius:8px 0 0 0;">触发场景</th>
+          <th style="padding:8px 10px;text-align:left;">当前状态字段</th>
+          <th style="padding:8px 10px;text-align:left;">说明字段</th>
+          <th style="padding:8px 10px;text-align:left;border-radius:0 8px 0 0;">发送时机</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:9px 10px;font-weight:600;color:#d46b08;">待付款</td>
+          <td style="padding:9px 10px;">订单未完成支付</td>
+          <td style="padding:9px 10px;color:#555;">您有一笔订单未完成支付，点击继续支付</td>
+          <td style="padding:9px 10px;color:#888;">下单后 <b>30 分钟</b>未支付触发一次</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa;">
+          <td style="padding:9px 10px;font-weight:600;color:#fa8c16;">待提交资料</td>
+          <td style="padding:9px 10px;">待提交资料</td>
+          <td style="padding:9px 10px;color:#555;">支付成功，请尽快提交资料</td>
+          <td style="padding:9px 10px;color:#888;">支付成功后 <b>24 小时</b>未提交触发一次</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:9px 10px;font-weight:600;color:#fa8c16;">发货后·未提交资料</td>
+          <td style="padding:9px 10px;">待提交资料</td>
+          <td style="padding:9px 10px;color:#555;">设备已发出，请提前完成资料提交</td>
+          <td style="padding:9px 10px;color:#888;">发货后仍未提交资料，<b>立即</b>触发一次</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa;">
+          <td style="padding:9px 10px;font-weight:600;color:#ff4d4f;">资料审核驳回</td>
+          <td style="padding:9px 10px;">资料审核未通过</td>
+          <td style="padding:9px 10px;color:#555;">您的资料审核未通过，请查看原因并重新提交</td>
+          <td style="padding:9px 10px;color:#888;">后台审核驳回后<b>立即</b>触发</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:9px 10px;font-weight:600;color:#07c160;">资料审核通过</td>
+          <td style="padding:9px 10px;">资料审核通过</td>
+          <td style="padding:9px 10px;color:#555;">资料审核通过</td>
+          <td style="padding:9px 10px;color:#888;">后台审核通过后<b>立即</b>触发</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa;">
+          <td style="padding:9px 10px;font-weight:600;color:#07c160;">待激活</td>
+          <td style="padding:9px 10px;">设备已到货</td>
+          <td style="padding:9px 10px;color:#555;">您的ETC设备已签收，立即激活即可使用</td>
+          <td style="padding:9px 10px;color:#888;">物流签收后<b>立即</b>触发；<b>48 小时</b>未激活再触发一次</td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:9px 10px;font-weight:600;color:#07c160;">待激活<br/><span style="font-weight:400;color:#07c160;font-size:10px;">✅ 新购 &amp; 以旧换新通用</span></td>
+          <td style="padding:9px 10px;">设备已到货</td>
+          <td style="padding:9px 10px;color:#555;">
+            <div><b>新购：</b>您的ETC设备已签收，立即激活即可使用</div>
+            <div style="margin-top:5px;padding-top:5px;border-top:1px dashed #e0e0e0;color:#d46b08;"><b>以旧换新：</b>新设备已到货，激活后旧设备将<b>自动注销</b>，请确认后操作</div>
+          </td>
+          <td style="padding:9px 10px;color:#888;">物流签收后<b>立即</b>触发；<b>48 小时</b>未激活再追一次<br/><span style="color:#d46b08;font-size:10px;">以旧换新版本附旧设备注销提示</span></td>
+        </tr>
+        <tr style="background:#f0f5ff;">
+          <td colspan="4" style="padding:8px 12px;font-size:11px;color:#0958d9;">
+            <b>📌 新购 vs 以旧换新 差异汇总：</b>除「待激活」说明字段不同外，其余 6 个触发场景的消息内容完全一致，可共用同一模版，由后端按订单类型动态填入说明字段即可。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="background:#fffbe6;border:1px solid #ffe58f;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:11px;color:#614700;line-height:1.8;">
+      <b>⚠ 待确认：</b><br/>
+      · 「发货后仍未提交资料」与「支付后24小时未提交」可能重叠——是否合并为一条，或发货后覆盖之前那条？<br/>
+      · 同一状态最多触发几次（如待付款是否只触发1次还是每隔N分钟再追一次）？<br/>
+      · 用户关闭订阅消息权限后的降级策略（如改发服务号通知）？
+    </div>
+  </div>
+
+</div>
+
+<style>
+.ot-req-table{width:100%;border-collapse:collapse;font-size:12px;margin:16px 0 28px;}
+.ot-req-table th{background:#1677ff;color:#fff;padding:8px 12px;text-align:left;font-weight:700;}
+.ot-req-table th:first-child{border-radius:8px 0 0 0;}
+.ot-req-table th:last-child{border-radius:0 8px 0 0;}
+.ot-req-table td{padding:9px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top;line-height:1.7;color:#333;}
+.ot-req-table tr:nth-child(even) td{background:#fafafa;}
+.ot-req-note{background:#f0f5ff;border-left:3px solid #1677ff;border-radius:0 6px 6px 0;padding:10px 14px;font-size:11px;color:#333;line-height:1.8;margin-bottom:24px;}
+.ot-req-note.orange{background:#fff7e6;border-color:#fa8c16;}
+.ot-req-note.red{background:#fff1f0;border-color:#ff4d4f;}
+</style>
 <div class="ot-h1">🛒 新购 — 触达示意</div>
 
 <!-- 场景：微信搜索广告 + 未办理弹窗/banner -->
@@ -5304,6 +5664,41 @@ function confirmCancel() {
 
 
 <!-- ══════════ 以旧换新 ══════════ -->
+
+<div style="margin-top:8px;margin-bottom:4px;font-size:13px;font-weight:800;color:#1677ff;">📋 新购触达需求说明</div>
+<table class="ot-req-table">
+  <thead><tr><th>触达方式</th><th>目标用户</th><th>触发条件 / 时机</th><th>内容要点</th><th>跳转目标</th><th>频次</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>微信搜一搜竞价广告</strong></td>
+      <td>主动搜索 ETC 相关词的微信用户</td>
+      <td>用户搜索：etc / etc办理 / ETC / ETC办理 等关键词</td>
+      <td>小程序卡片广告，突出价格（¥125起）、免贴玻璃、高速95折；排在自然结果最上方</td>
+      <td>办理首页</td>
+      <td>常态化投放，按竞价预算控制曝光</td>
+    </tr>
+    <tr>
+      <td><strong>小程序首页 Banner</strong></td>
+      <td>进入小程序且<b>无有效ETC设备</b>的用户</td>
+      <td>用户打开小程序首页，系统检测无有效设备</td>
+      <td>引导办理 ETC，突出权益（95折/洗车券/质保3年）和价格入口</td>
+      <td>办理首页</td>
+      <td>常驻展示，直至用户完成办理</td>
+    </tr>
+    <tr>
+      <td><strong>小程序首页弹窗</strong></td>
+      <td>进入小程序且<b>无有效ETC设备</b>的用户</td>
+      <td>用户进入首页后 1 秒触发；仅在无设备状态下弹出</td>
+      <td>弹窗展示价格对比（原价/现价）+核心权益，CTA「立即办理」</td>
+      <td>办理首页</td>
+      <td>每自然周最多触发 <b>1 次</b>；用户关闭后当日不再弹出</td>
+    </tr>
+  </tbody>
+</table>
+<div class="ot-req-note">
+  <b>待确认：</b>Banner 与弹窗是否同一次访问同时触发，还是弹窗优先、Banner 作为常驻降级？建议弹窗优先，Banner 常驻作为补充曝光。
+</div>
+
 <div class="ot-h1 orange">🔄 以旧换新 — 触达示意</div>
 
 <!-- ─── 场景A：质保到期前1个月 ─── -->
@@ -5476,6 +5871,49 @@ function confirmCancel() {
 </div>
 
 <!-- ─── 场景B：质保到期后 ─── -->
+
+<div style="margin-top:8px;margin-bottom:4px;font-size:13px;font-weight:800;color:#fa8c16;">📋 场景A需求说明：质保到期前 1 个月</div>
+<table class="ot-req-table">
+  <thead><tr><th style="background:#fa8c16;">触达渠道</th><th style="background:#fa8c16;">目标用户</th><th style="background:#fa8c16;">触发时机</th><th style="background:#fa8c16;">内容要点</th><th style="background:#fa8c16;">跳转目标</th><th style="background:#fa8c16;">频次</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>短信</strong></td>
+      <td rowspan="3" style="background:#fff7e6;">有效ETC设备<br/>质保剩余 <b>30 天</b>的用户</td>
+      <td rowspan="3" style="background:#fff7e6;">质保到期日 <b>前 30 天</b>（精确到日，当日 10:00 触发）</td>
+      <td>【小万出行】提醒质保即将到期，旧设备最高抵 ¥40，2026款新ETC质保3年起算，附换新链接</td>
+      <td>换新落地页</td>
+      <td rowspan="3" style="background:#fff7e6;">各渠道各触发 <b>1 次</b></td>
+    </tr>
+    <tr>
+      <td><strong>小程序订阅消息</strong></td>
+      <td>「设备质保到期提醒」模版，字段：设备型号 / 质保到期日 / 换新优惠 / 温馨提示</td>
+      <td>进入小程序换新页</td>
+    </tr>
+    <tr>
+      <td><strong>公众号服务通知</strong></td>
+      <td>服务号模版消息，同订阅消息字段，附「点击查看」链接</td>
+      <td>进入小程序换新页</td>
+    </tr>
+    <tr>
+      <td><strong>小程序首页 Banner</strong></td>
+      <td rowspan="2" style="background:#fff7e6;">同上</td>
+      <td>用户在到期前 1 个月内打开小程序首页</td>
+      <td>橙色换新 Banner，「质保1个月后到期 · 换新旧设备抵¥40」，CTA「立即换新」</td>
+      <td rowspan="2" style="background:#fff7e6;">以旧换新首页</td>
+      <td>场景A期间<b>常驻</b>展示，场景B开始后替换为红色版本</td>
+    </tr>
+    <tr>
+      <td><strong>小程序首页弹窗</strong></td>
+      <td>用户进入首页后 1 秒触发</td>
+      <td>橙色弹窗，原价/直降/现价对比，「¥49.9 立即换新」</td>
+      <td>每自然周最多触发 <b>1 次</b>；用户关闭后当日不再弹出</td>
+    </tr>
+  </tbody>
+</table>
+<div class="ot-req-note orange">
+  <b>待确认：</b>用户同时满足场景A和场景B条件（如到期日当天）时，以哪个场景优先？建议以到期后（场景B）为准，内容更紧迫。
+</div>
+
 <div class="ot-h2" style="background:#ff4d4f;">❗ 场景B：质保已到期</div>
 <div class="ot-row">
 
@@ -5643,6 +6081,48 @@ function confirmCancel() {
   </div>
 
 </div>
+<div style="margin-top:8px;margin-bottom:4px;font-size:13px;font-weight:800;color:#ff4d4f;">📋 场景B需求说明：质保已到期</div>
+<table class="ot-req-table">
+  <thead><tr><th style="background:#ff4d4f;">触达渠道</th><th style="background:#ff4d4f;">目标用户</th><th style="background:#ff4d4f;">触发时机</th><th style="background:#ff4d4f;">内容要点</th><th style="background:#ff4d4f;">跳转目标</th><th style="background:#ff4d4f;">频次</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>短信</strong></td>
+      <td rowspan="3" style="background:#fff1f0;">ETC设备<b>质保已到期</b>且未换新的用户</td>
+      <td rowspan="3" style="background:#fff1f0;">质保到期日<b>当天</b>（00:00后，10:00触发）</td>
+      <td>【小万出行】设备质保已到期，故障维修约¥298，立即换新仅¥49.9，旧设备抵¥40，附换新链接</td>
+      <td>换新落地页</td>
+      <td rowspan="3" style="background:#fff1f0;">各渠道各触发 <b>1 次</b>；此后不再主动触达（避免打扰）</td>
+    </tr>
+    <tr>
+      <td><strong>小程序订阅消息</strong></td>
+      <td>「设备质保到期提醒」模版，当前状态字段标红「已过期」，说明字段强调维修费用对比换新成本</td>
+      <td>进入小程序换新页</td>
+    </tr>
+    <tr>
+      <td><strong>公众号服务通知</strong></td>
+      <td>同订阅消息，红色紧急风格，标题「ETC质保已到期」</td>
+      <td>进入小程序换新页</td>
+    </tr>
+    <tr>
+      <td><strong>小程序首页 Banner</strong></td>
+      <td rowspan="2" style="background:#fff1f0;">同上</td>
+      <td>用户在到期后打开小程序首页</td>
+      <td>红色 Banner，「质保已到期 · 故障维修约¥298」，CTA「立即换新」；替换场景A橙色版本</td>
+      <td rowspan="2" style="background:#fff1f0;">以旧换新首页</td>
+      <td>到期后<b>常驻</b>展示，直至用户完成换新</td>
+    </tr>
+    <tr>
+      <td><strong>小程序首页弹窗</strong></td>
+      <td>用户进入首页后 1 秒触发</td>
+      <td>红色弹窗，紧迫感更强，「¥49.9 立即换新」</td>
+      <td>每自然周最多触发 <b>1 次</b>；用户关闭后当日不再弹出</td>
+    </tr>
+  </tbody>
+</table>
+<div class="ot-req-note red">
+  <b>待确认：</b>用户已换新后，Banner 和弹窗是否立即撤销？建议换新订单支付成功后即撤销，避免重复触达。
+</div>
+
 </div>
 </div>
 
